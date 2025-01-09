@@ -1,0 +1,30 @@
+{% extends 'camping/base.html' %}
+{% block title %}Lista de Campistas{% endblock %}
+{% block content %}
+<h1>Lista de Campistas</h1>
+<a href="{% url 'crear_campista' %}" class="btn btn-primary mb-3">Crear Campista</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for campista in campistas %}
+        <tr>
+            <td>{{ campista.nombre_completo }}</td>
+            <td>{{ campista.correo_electronico }}</td>
+            <td>{{ campista.telefono }}</td>
+            <td>
+                <a href="{% url 'detalle_campista' campista.id %}" class="btn btn-info btn-sm">Ver</a>
+                <a href="{% url 'editar_campista' campista.id %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'eliminar_campista' campista.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

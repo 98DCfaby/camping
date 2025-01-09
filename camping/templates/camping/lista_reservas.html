@@ -1,0 +1,32 @@
+{% extends 'camping/base.html' %}
+{% block title %}Lista de Reservas{% endblock %}
+{% block content %}
+<h1>Lista de Reservas</h1>
+<a href="{% url 'crear_reserva' %}" class="btn btn-primary mb-3">Crear Reserva</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Campista</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Fin</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reserva in reservas %}
+        <tr>
+            <td>{{ reserva.campista.nombre_completo }}</td>
+            <td>{{ reserva.fecha_inicio }}</td>
+            <td>{{ reserva.fecha_fin }}</td>
+            <td>{{ reserva.estado_reserva }}</td>
+            <td>
+                <a href="{% url 'detalle_reserva' reserva.id %}" class="btn btn-info btn-sm">Ver</a>
+                <a href="{% url 'editar_reserva' reserva.id %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'eliminar_reserva' reserva.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
